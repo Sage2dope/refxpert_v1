@@ -1,0 +1,147 @@
+{%extends "refxpert/base.html"%}
+
+
+
+{% block content %}
+   
+{% include "refxpert/components/dashboard.html" %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="flex-1">
+  <header class="bg-gray-100 py-4 px-6 font-bold italic text-2xl">
+    Welcome Back, <span class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-medium text-transparent sm:text-3xl">{{ user.username }}!</span>
+  </header>
+      
+   
+    <section class="button-wrapper container px-6 py-10 mx-4">
+      <a href="{% url 'ref_optionform' %}">
+        <button class="neumorphism-button">
+          <span>
+            <h1 class="bg-gray-100 py-4 px-6 font-bold text-2xl">START REFERENCE</h1>
+            </span>
+       </button>
+      </a>
+      <style>
+      
+      .neumorphism-button {
+        padding: 10px 20px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: 'blue-900';
+        background-color: #f0f0f0;
+        box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.8), 5px 5px 10px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+      }
+      
+      .neumorphism-button:hover {
+        color: #800080;
+        box-shadow: -1px -1px 5px rgba(255, 255, 255, 0.6), 1px 1px 5px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(255, 255, 255, 1), inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      </style>
+    </section>
+        <script>
+          {%for msg in messages%}
+          swal('{{msg}}');
+          {% endfor %}
+        </script>
+
+    <section>
+      <div class="" >
+        <a href="https://drive.google.com/file/d/1Im2uw0UVcgr-x6xttT2FcKCYVRW30xwN/view?usp=sharing" class=" underline underline-offset-1 py-8 px-12 font-light text-2xl hover: text-blue-950 active:text-red-700">Download Reference Form</a>
+      </div>
+    </section>
+    <section>
+      <div class="flex-grow overflow-x-auto">
+        <div class="relative py-8 ">
+            <form method="get">
+                <label for="search" class="sr-only"> Search </label>
+                <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="Search Tenant..."
+                    class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+                    value="{{ request.GET.search|default:'' }}"
+                />
+                <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                    <button type="submit" class="text-gray-600 hover:text-gray-700">
+                        <span class="sr-only">Search</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="h-4 w-4"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                            />
+                        </svg>
+                    </button>
+                </span>
+            </form>
+        </div>
+  <table class="min-w-full divide-y-2 divide-gray-200 bg-gray-100 text-sm">
+    <thead class="ltr:text-left rtl:text-right">
+      <tr>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          Tenant
+        </th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          Property 
+        </th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          Annual Income
+        </th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          Employer
+        </th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          Landlord
+        </th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+         Status
+        </th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+
+    <tbody class="divide-y divide-gray-200">
+      {% for save_form in saved_form %}
+      <tr>
+        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          {{save_form.last_name}}
+        </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{save_form.property_name}}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{save_form.annual_income}}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{save_form.employer}}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{save_form.landlord_name}}</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{save_form.status}}</td>
+        <td class="whitespace-nowrap px-4 py-2">
+          <a
+            href="{% url 'tenantform_view' save_form.id %}"
+            class="inline-block rounded bg-blue-950 px-4 py-2 text-xs font-medium text-white hover:bg-blue-950"
+          >
+            View
+          </a>
+        </td>
+      </tr>
+      {% empty %}
+              <tr>
+                  <td colspan="6">No Reference found.</td>
+              </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div> 
+</section>
+
+
+</div>
+{% endblock %}
+```

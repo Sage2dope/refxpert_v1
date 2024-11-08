@@ -1,0 +1,78 @@
+{%extends "refxpert/base.html"%}
+
+{% block content %}
+
+<section class="bg-gray-100">
+    <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+        <div class="lg:col-span-2 lg:py-12">
+          <p class="max-w-xl text-lg">
+            Please fill the form below providing the tenant details and we will get back to you as soon as possible, 
+            or you can call us on <a href="tel:+44 758 585 7424" class="font-bold text-blue-950">+44 758 585 7424</a>
+          </p>
+        </div>
+  
+        <div class="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
+          <form action="https://formspree.io/f/mrgwnavk" method= "POST" class="space-y-4">
+            <input type="hidden" name="User name" value="{{ request.user.username }}" required>
+            <div>
+              <label class="sr-only" for="name">Tenant Name</label>
+              <input
+                class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                placeholder="Tenant Name"
+                type="text"
+                name=" Tenant name"
+                required
+              />
+            </div>
+  
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label class="sr-only" for="email">Tenant Email </label>
+                <input
+                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  placeholder="Tenant Email address"
+                  type="email"
+                  name="Tenant email"
+                  required
+                />
+              </div>
+  
+              <div>
+                <label class="sr-only" for="phone">Phone Details</label>
+                <input
+                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                  placeholder="Tenant Phone Number"
+                  type="tel"
+                  name="Tenant phone"
+                  required
+                />
+              </div>
+            </div>
+  
+            <div>
+              <label class="sr-only" for="message">Message</label>
+  
+              <textarea
+                class="w-full rounded-lg border-gray-200 p-3 text-sm"
+                placeholder="Add a Message"
+                rows="8"
+                name="Agent message"
+                required
+              ></textarea>
+            </div>
+            <div class="mt-4">
+              <button
+                type="submit"
+                class="inline-block w-full rounded-lg bg-blue-950 px-5 py-3 font-medium text-white sm:w-auto"
+              >
+                Send 
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% endblock %}

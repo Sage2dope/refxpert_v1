@@ -1,0 +1,69 @@
+{%extends "refxpert/base.html"%}
+
+
+
+{% block content %}
+<section class="bg-gray-950 text-white">
+    <div
+      class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"
+    >
+      <div class="mx-auto max-w-3xl text-center">
+        <h1
+          class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl"
+        >
+          Understand User Experience.
+  
+          <span class="sm:block"> Let's Get You Started </span>
+        </h1>
+  
+        <p class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+          Please select the button below to get started.
+        </p>
+  
+        <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a
+            class="inline-flex items-center gap-2 rounded border border-blue-950 bg-blue-950 px-8 py-3 text-white hover:bg-transparent hover:text-blue-950 focus:outline-none focus:ring active:text-indigo-500"
+            href="/tenantform" >
+                    <span class="text-sm font-medium"> Complete the form for tenant</span>
+                
+                    <svg
+                    class="h-5 w-5 rtl:rotate-180"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                    </svg>
+          </a>
+  
+          <a
+          class="inline-flex items-center gap-2 rounded border border-blue-950 bg-blue-950 px-8 py-3 text-white hover:bg-transparent hover:text-blue-950 focus:outline-none focus:ring active:text-indigo-500"
+          href="/emailtenant" >
+                  <span class="text-sm font-medium"> Email Tenant to complete the Form</span>
+              
+                  <svg
+                  class="h-5 w-5 rtl:rotate-180"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  >
+                  <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                  </svg>
+        </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock %}

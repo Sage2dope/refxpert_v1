@@ -1,0 +1,110 @@
+{%extends "refxpert/base.html"%}
+
+
+
+{%block content%}
+
+{% include "refxpert/components/dashboard.html" %}
+
+<main class="py-6 px-8">
+  <div class="container mx-auto px-5 w-full">
+    <div class="flex-grow overflow-x-auto">
+             
+            <div class="relative">
+              <label for="Search" class="sr-only"> Search </label>
+
+              <input
+                type="text"
+                id="Search"
+                placeholder="Search Property..."
+                class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm"
+              />
+
+              <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                <button type="button" class="text-gray-600 hover:text-gray-700">
+                  <span class="sr-only">Search</span>
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="h-4 w-4"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </button>
+              </span>
+            </div>
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <thead class="ltr:text-left rtl:text-right">
+            <tr>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Property
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Property Type
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                No. of Units
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Date Created 
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Next Rent Collection
+              </th>
+              <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Total Rent Processed
+              </th>
+              <th class="px-4 py-2"></th>
+            </tr>
+          </thead>
+      
+          <tbody class="divide-y divide-gray-200">
+            {% for property in properties%}
+            <tr>
+              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                {{property.Property}}
+              </td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{property.PropertyType}}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{property.NumberOfUnits}}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{property.date_created}}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{property.RentCollectedDate}}</td>
+              <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{property.Rent}}</td>
+              <td class="whitespace-nowrap px-4 py-2">
+                <a
+                  href="{% url 'propertymanagement_view' property.id %}"
+                  class="inline-block rounded bg-blue-950 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                >
+                  View
+                </a>
+              </td>
+            </tr>
+            {% empty %}
+                    <tr>
+                        <td colspan="6">No properties found.</td>
+                    </tr>
+                {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>   
+    <section class="text-gray-600 body-font" id="mySection">
+      <div class="container px-6 py-20 mx-4">
+        <div class="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto">
+          <h1 class="flex-grow sm:pr-16 text-2xl font-medium title-font text-gray-900">Your Property in Safe Hands. Get Started With Us Today!</h1>
+          {% if not property_exists %}
+          <a id="myButton" href="/contact" class="flex-shrink-0 text-white bg-blue-950 border-0 py-2 px-8 focus:outline-none hover:bg-blue-950 rounded text-lg mt-10 sm:mt-0">Start</a>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+</main>
+{%endblock%}
+```

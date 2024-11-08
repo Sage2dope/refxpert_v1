@@ -1,0 +1,45 @@
+{%block content%}
+
+
+    <article
+  class="rounded-lg border border-gray-100 bg-gray-50 p-4 shadow-lg transition hover:shadow-lg sm:p-6"
+>
+<p class="mb-6 flex items-center font-bold uppercase text-danger dark:text-danger-500">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+    class="mr-2 h-5 w-5">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+    </svg>Other News
+</p>
+
+  <a >
+    {% for post in posts %}
+    <h3 class="mt-0.5 text-xl font-bold text-gray-900">
+      {{post.title}}
+    </h3>
+  </a>
+
+  <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+    {{ post.content|safe|truncatewords:30 }}
+  </p>
+
+  <a
+    href="{% url 'tenancy_post_view' post.id %}"
+    class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-blue-600"
+  >
+    Read more
+
+    <span
+      aria-hidden="true"
+      class="block transition-all group-hover:ms-0.5 rtl:rotate-180"
+    >
+      &rarr;
+    </span>
+  </a>
+  {% endfor %}
+</article>
+
+
+{%endblock%}

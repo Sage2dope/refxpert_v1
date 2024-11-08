@@ -1,0 +1,66 @@
+{%extends "refxpert/base.html"%}
+
+{%block content%}
+
+<main class="py-6 px-8">
+    <div>
+        <div class="px-4 sm:px-0">
+            <h3 class="text-base font-bold leading-7 text-gray-900">See avaialble positions</h3>
+            <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Job details and application.</p>
+        </div>
+
+        <!-- Job positions and descriptions -->
+        {% for job in jobs %}
+        <div class="mt-4">
+            <button class="w-full px-4 py-10 text-left text-xl text-gray-700 bg-gray-100 rounded-lg focus:outline-none" onclick="toggleJobDescription({{ job.id }})">
+                {{ job.title }} <!-- Changed from job.position to job.title -->
+            </button>
+            <div id="jobDescription{{ job.id }}" class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm" style="display: none;">
+            <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
+                <dl class="-my-3 divide-y divide-gray-100 text-sm">
+                  <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Title</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{ job.title }}</dd>
+                  </div>
+              
+                  <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Location</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{ job.location }}</dd>
+                  </div>
+              
+                  <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Description</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{ job.description | safe |truncatewords:30}}<a href="{% url 'job_detail' job.id %}" style="font-style: italic; font-weight: 600; color: red;">View Details</a></dd>
+                  </div>
+                  
+              
+                  <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Status</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{ job.status }}</dd>
+                  </div>
+              
+                  <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">Apply</dt>
+                    <dd class="text-gray-700 sm:col-span-2">
+                      <a href="{% url 'apply' job.id %}" class="inline-block w-full rounded-lg bg-blue-950 px-5 py-3 font-medium text-white sm:w-auto">Apply Now</a>
+                    </dd>
+                  </div>
+                </dl>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<script>
+function toggleJobDescription(id) {
+    var x = document.getElementById("jobDescription" + id);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+
+{%endblock%}

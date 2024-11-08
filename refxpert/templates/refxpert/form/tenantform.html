@@ -1,0 +1,575 @@
+
+{%extends "refxpert/base.html"%}
+
+
+
+{%block content%}
+
+{% include "refxpert/components/dashboard.html" %}
+
+
+<main class="py-6 px-8">
+  
+  <div>
+        <div class="px-4 sm:px-0">
+          <h3 class="text-base font-bold leading-7 text-gray-900">Applicant Information</h3>
+          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and application.</p>
+        </div>
+        <div class="mt-6 border-t border-gray-100">
+          <dl class="divide-y divide-gray-100">
+    <form action="{% url 'tenantform' %}" id="myForm" method="POST">
+              {% csrf_token %}
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">First Name</dt>
+                  <label for="FirstName" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-950" >
+                      <input
+                      type="text"
+                      name="first_name"
+                      value="{{ formz.first_name.value|default:'' }}" 
+                      id="firstname"
+                      placeholder="First Name"
+                      class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                      />
+                      {% if formz.first_name.errors %}
+                          <div class="text-red-500 mt-2 text-sm">
+                              {{ formz.first_name.errors }}
+                          </div>
+                      {% endif %}
+                  </label>
+           </div>
+
+           <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">Last Name</dt>
+              <label for="LastName" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                  <input
+                  type="text" 
+                  name="last_name"
+                  value="{{ formz.last_name.value|default:'' }}" 
+                  id="lastname"
+                  placeholder="Last Name"
+                  class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                     {% if formz.last_name.errors %}
+                          <div class="text-red-500 mt-2 text-sm">
+                              {{ formz.last_name.errors }}
+                          </div>
+                      {% endif %}
+              </label>
+        </div>
+
+        <div class=" form-group px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Date of Birth:</dt>
+          <label for="{{ formz.date_of_birth.id_for_label }}" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500">
+            <input
+              type="date"
+              name="date_of_birth"
+              value="{{ formz.date_of_birth.value|default:'' }}"
+              id="{{ formz.date_of_birth.id_for_label }}"
+              class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+            />
+            {% if formz.date_of_birth.errors %}
+            <div class="text-red-500 mt-2 text-sm">
+                {{ formz.date_of_birth.errors }}
+            </div>
+            {% endif %}      
+          </label>
+        </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-900">Email address</dt>
+                <label for="UserEmail" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="email"
+                    name="email"
+                    value="{{ formz.email.value|default:'' }}" 
+                    id="UserEmail"
+                    placeholder="Email"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                    {% if formz.email.errors %}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ formz.email.errors }}
+                        </div>
+                    {% endif %}
+                </label>
+         </div>
+
+
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900"> Confirm Email</dt>
+              <label for="ConfirmEmail" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                  <input
+                  type="email"
+                  name="confirm_email"
+                  value="{{ formz.confirm_email.value|default:'' }}" 
+                  id="id_email"
+                  placeholder="Email"
+                  class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                      {% if formz.confirm_email.errors %}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ formz.confirm_email.errors }}
+                        </div>
+                    {% endif %}
+              </label>
+          </div>
+
+
+ 
+         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Phone</dt>
+            <label for="Phone" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                <input
+                type="Phone" 
+                name="phone" 
+                value="{{ formz.phone.value|default:'' }}" 
+                id="id_phone"
+                placeholder="Phone Number"
+                class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                />
+                    {% if formz.phone.errors %}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ formz.phone.errors }}
+                        </div>
+                    {% endif %}
+            </label>
+         </div>
+
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">Applicant Address</dt>
+              <label for="property_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-600" >
+                  <input
+                  type="address"
+                  name="property_name"
+                  value="{{ formz.property_name.value|default:'' }}" 
+                  id="Email"
+                  placeholder="Address details..."
+                  class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                  {% if formz.property_name.errors %}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ formz.property_name.errors }}
+                        </div>
+                    {% endif %}
+              </label>
+      </div>
+
+              <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt class="text-sm font-medium leading-6 text-gray-900">Country of Origin </dt>
+                  <select
+                    name="country"
+                    id="id_country"
+                    class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                  >
+                  {% for value, display in formz.country.field.choices %}
+                  <option value="{{ value }}" {% if formz.country.value == value %}selected{% endif %}>{{ display }}</option>
+                  {% endfor %}
+                  </select>
+                  {% if formz.country.errors %}
+                      <div class="text-red-500 mt-2 text-sm">
+                          {{ formz.country.errors }}
+                      </div>
+                  {% endif %}
+                </div>
+
+                
+        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Property Address</dt>
+            <label for="house_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-600" >
+                <input
+                type="address"
+                name="address"
+                value="{{ formz.address.value|default:'' }}" 
+                id="Email"
+                placeholder="Address details..."
+                class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                />
+            </label>
+            {% if formz.address.errors %}
+                <div class="text-red-500 mt-2 text-sm">
+                    {{ formz.address.errors }}
+                </div>
+            {% endif %}
+         </div>
+
+        <div class="px-4 py-4 sm:px-0">
+          <h3 class="text-base font-bold leading-7 text-gray-900">Employment Details</h3>
+          <div class="flex items-center">
+              <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Email Notification</p>
+              <input type="checkbox" id="email_tenant" name="email_tenant" class="ml-4">
+          </div>
+          <div class="flex items-center">
+              <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
+                Allow tenant to fill in guarantor contact details  
+                </p>
+              <input type="checkbox" id="guarantor_fill" name="guarantor_fill" class="ml-4">
+          </div>
+          <p class="mt-1 max-w-2xl text-sm font-bold leading-6 text-gray-500 font italic">
+            (This is not required if tenant already has an employment condition.)
+          </p>
+        </div>
+    
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt required class="text-sm font-medium leading-6 text-gray-900">Employment *</dt>
+                  <select
+                    name="employment" id="id_employment"
+                    class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                  >
+                      {% for value, display in formz.employment.field.choices %}
+                      <option value="{{ value }}" {% if formz.employment.value == value %}selected{% endif %}>{{ display }}</option>
+                      {% endfor %}
+                  </select>
+                  {% if formz.employment.errors %}
+                      <div class="text-red-500 mt-2 text-sm">
+                          {{ formz.employment.errors }}
+                      </div>
+                  {% endif %}
+                </div>
+            
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900">Employer</dt>
+                    <label for="Employer" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                        <input
+                        type="text" 
+                        name="employer"
+                        value="{{ formz.employer.value|default:'' }}" 
+                        id="employer"
+                        placeholder="Employer"
+                        class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        />
+                           {% if formz.employer.errors %}
+                                <div class="text-red-500 mt-2 text-sm">
+                                    {{ formz.employer.errors }}
+                                </div>
+                            {% endif %}
+                    </label>
+              </div>
+              
+            
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-900">Employer Address</dt>
+                <label for="employer_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="text" 
+                    name="employer_address"
+                    value="{{ formz.employer_address.value|default:'' }}" 
+                    id="employer_address"
+                    placeholder="Employer"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                       {% if formz.employer_address.errors %}
+                            <div class="text-red-500 mt-2 text-sm">
+                                {{ formz.employer_address.errors }}
+                            </div>
+                        {% endif %}
+                </label>
+          </div>
+
+
+
+          <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt required class="text-sm font-medium leading-6 text-gray-900">Employer Phone</dt>
+              <label for="employer_phone" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                  <input
+                  type="Phone" 
+                  name="employer_phone" 
+                  value="{{ formz.employer_phone.value|default:'' }}" 
+                  id="id_employer_phone"
+                  placeholder="Phone Number"
+                  class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+              </label>
+              {% if formz.employer_phone.errors %}
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ formz.employer_phone.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt class="text-sm font-medium leading-6 text-gray-900">Job Title</dt>
+                <label for="job_title" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="text" 
+                    name="job_title"
+                    value="{{ formz.job_title.value|default:'' }}" 
+                    id="job_title"
+                    placeholder="job_title"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                       {% if formz.job_title.errors %}
+                            <div class="text-red-500 mt-2 text-sm">
+                                {{ formz.job_title.errors }}
+                            </div>
+                        {% endif %}
+                </label>
+          </div>
+
+
+
+                <div required class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                    <dt class="text-sm font-medium leading-6 text-gray-900">Annual Income *</dt>
+                      <label for="annual_income" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                          <input
+                          type="number" 
+                          name="annual_income" 
+                          value="{{ formz.annual_income.value|default:'' }}" 
+                          id="Income"
+                          class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                          />
+                          {% if formz.annual_income.errors %}
+                                <div class="text-red-500 mt-2 text-sm">
+                                    {{ formz.annual_income.errors }}
+                                </div>
+                            {% endif %}
+                      </label>
+               </div>
+
+               <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt required class="text-sm font-medium leading-6 text-gray-900">Gender</dt>
+                  <select
+                    name="gender"
+                    id="id_gender"
+                    class="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                  >
+                    {% for value, display in formz.gender.field.choices %}
+                    <option value="{{ value }}" {% if formz.gender.value == value %}selected{% endif %}>{{ display }}</option>
+                    {% endfor %}
+                  </select>
+                  {% if formz.gender.errors %}
+                      <div class="text-red-500 mt-2 text-sm">
+                          {{ formz.gender.errors }}
+                      </div>
+                  {% endif %}
+                </div>
+
+                <div class="px-4 py-4 sm:px-0">
+                    <h3 class="text-base font-bold leading-7 text-gray-900">Additional Information</h3>
+                    <div class="flex items-center">
+                        <p required class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Does anybody smoke in this household?</p>
+                        <input type="checkbox" id="smoking" name="smoking" class="ml-4">
+                    </div>
+                    <div class="flex items-center">
+                        <p required class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Do they plan on having pets in the property?</p>
+                        <input type="checkbox" id="pets" name="pets" class="ml-4">
+                    </div>
+                    <div class="flex items-center">
+                        <p required class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Will there be any children living with you in the property?</p>
+                        <input type="checkbox" id="children" name="children" class="ml-4">
+                    </div>
+                </div>
+                 
+
+                <div class="px-4 py-8 sm:px-0">
+                  <h3 required class="text-base font-bold leading-7 text-gray-900">Previous Landlord details</h3>
+                </div>
+              
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt required class="text-sm font-medium leading-6 text-gray-900">Full Name</dt>
+                  <label for="next_of_kin" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                      <input
+                      type="text" 
+                      name="landlord_name" 
+                      value="{{ formz.landlord_name.value|default:'' }}" 
+                      id="id_landlord_name"
+                      placeholder="Full Name"
+                      class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                      />
+                  </label>
+                  {% if formz.landlord_name.errors %}
+                      <div class="text-red-500 mt-2 text-sm">
+                          {{ formz.landlord_name.errors }}
+                      </div>
+                  {% endif %}
+              </div>
+              
+              <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt required class="text-sm font-medium leading-6 text-gray-900">Email</dt>
+                  <label for="landlord_email" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                      <input
+                      type="email" 
+                      name="landlord_email" 
+                      value="{{ formz.landlord_email.value|default:'' }}" 
+                      id="id_landlord_email"
+                      placeholder="Email address"
+                      class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                      />
+                      {% if formz.landlord_email.errors %}
+                          <div class="text-red-500 mt-2 text-sm">
+                              {{ formz.landlord_email.errors }}
+                          </div>
+                      {% endif %}
+                  </label>
+              </div>
+
+
+
+              <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt required class="text-sm font-medium leading-6 text-gray-900">Phone</dt>
+                <label for="landlord_phone" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="Phone" 
+                    name="landlord_phone" 
+                    value="{{ formz.landlord_phone.value|default:'' }}" 
+                    id="id_landlord_phone"
+                    placeholder="Phone Number"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                </label>
+                {% if formz.landlord_phone.errors %}
+                      <div class="text-red-500 mt-2 text-sm">
+                          {{ formz.landlord_phone.errors }}
+                      </div>
+                  {% endif %}
+              </div>
+              
+              
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt required class="text-sm font-medium leading-6 text-gray-900"> Address</dt>
+                    <label for="landlord_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                        <input
+                        type="address" 
+                        name="landlord_address" 
+                        value="{{ formz.landlord_address.value|default:'' }}" 
+                        id="id_landlord_address"
+                        placeholder="Full Address"
+                        class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        />
+                        {% if formz.landlord_address.errors %}
+                              <div class="text-red-500 mt-2 text-sm">
+                                  {{ formz.landlord_address.errors }}
+                              </div>
+                        {% endif %}
+                    </label>
+              </div>
+              
+      
+
+                <div class="px-4 py-8 sm:px-0">
+                  <h3 required class="text-base font-bold leading-7 text-gray-900">Next of Kin details</h3>
+                </div>
+
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt required class="text-sm font-medium leading-6 text-gray-900">Full Name</dt>
+                    <label for="next_of_kin" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                        <input
+                        type="text" 
+                        name="next_of_kin" 
+                        value="{{ formz.next_of_kin.value|default:'' }}" 
+                        id="id_next_of_kin"
+                        placeholder="Full Name"
+                        class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        />
+                        {% if formz.next_of_kin.errors %}
+                              <div class="text-red-500 mt-2 text-sm">
+                                  {{ formz.next_of_kin.errors }}
+                              </div>
+                        {% endif %}
+                    </label>
+              </div>
+
+             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt required class="text-sm font-medium leading-6 text-gray-900">Phone</dt>
+                <label for="next_of_kin_phone" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="Phone" 
+                    name="next_of_kin_phone" 
+                    value="{{ formz.next_of_kin_phone.value|default:'' }}" 
+                    id="id_next_of_kin_phone"
+                    placeholder="Phone Number"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                        {% if formz.next_of_kin_phone.errors %}
+                              <div class="text-red-500 mt-2 text-sm">
+                                  {{ formz.next_of_kin_phone.errors }}
+                              </div>
+                        {% endif %}
+                </label>
+             </div>
+
+
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt required class="text-sm font-medium leading-6 text-gray-900">Next of Kin Address</dt>
+                    <label for="next_of_kin_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                        <input
+                        type="address" 
+                        name="next_of_kin_address" 
+                        value="{{ formz.next_of_kin_address.value|default:'' }}" 
+                        id="id_next_of_kin_address"
+                        placeholder="Full Address"
+                        class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                        />
+                        {% if formz.next_of_kin_address.errors %}
+                              <div class="text-red-500 mt-2 text-sm">
+                                  {{ formz.next_of_kin_address.errors }}
+                              </div>
+                        {% endif %}
+                    </label>
+             </div>
+
+             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt required class="text-sm font-medium leading-6 text-gray-900">Next of Kin Relationship</dt>
+                <label for="next_of_kin_address" class="relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-950 focus-within:ring-1 focus-within:ring-blue-9500" >
+                    <input
+                    type="address" 
+                    name="next_of_kin_relationship" 
+                    value="{{ formz.next_of_kin_relationship.value|default:'' }}" 
+                    id="id_next_of_kin_relationship"
+                    placeholder="Full Address"
+                    class="peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+                    />
+                    {% if formz.next_of_kin_relationship.errors %}
+                              <div class="text-red-500 mt-2 text-sm">
+                                  {{ formz.next_of_kin_relationship.errors }}
+                              </div>
+                        {% endif %}
+                </label>
+             </div>
+
+               
+              <div class="px-4 py-8 sm:px-0">
+                <h3 class="text-base font-bold leading-7 text-gray-900">Permissions</h3>
+              </div>
+
+              <div class="flex items-center">
+                <p class="mt-2 px-2 py-4 max-w-2xl text-sm leading-6 text-gray-500">
+                   I hereby confirm that I have ensured
+                   that the Tenant above has signed the Tenant/Guarantor Reference form
+                   and agreed to the terms of the Privacy Policy.</p>
+                <input type="checkbox" id="id_permission" name="permission" class="ml-4">
+            </div>
+            <div class="flex items-center">
+              <p class="mt-1 px-2 py-4 max-w-2xl text-sm leading-6 text-gray-500">
+                I confirm that the Tenant has consented to 
+                receiving direct marketing in accordance with the Privacy Policy</p>
+              <input type="checkbox" id="id_marketing" name="marketing" class="ml-4">
+          </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <a class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
+                 onclick="document.getElementById('myForm').submit();"
+                >
+                
+                  <span
+                    class="absolute inset-0 border border-blue-950 group-active:border-blue-950"
+                  ></span>
+                  <span
+                    class="block border border-blue-950 bg-blue-950 px-12 py-3 transition-transform active:border-blue-950 active:bg-blue-950 group-hover:-translate-x-1 group-hover:-translate-y-1"
+                  >
+                    Submit
+                  </span>
+                </a>
+            </div>
+          </form> 
+          </dl>
+        </div>
+      </div>
+</main>
+
+            
+
+
+
+
+{%endblock%}
+```
