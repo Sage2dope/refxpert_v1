@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-aag1q^^n1enk#7e%heeqwbg_%**si_^&+%6jh!d(ld3qd#g(+h"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False  # Temporarily set to True for debugging
 
 ALLOWED_HOSTS = ['refxpert-8dbbc92cb077.herokuapp.com', '127.0.0.1', "www.refxpert.com", "refxpert.com"]
 CSRF_TRUSTED_ORIGINS = ['https://www.refxpert.com', 'https://refxpert.com','https://refxpert-8dbbc92cb077.herokuapp.com']
@@ -39,7 +39,6 @@ CSRF_TRUSTED_ORIGINS = ['https://www.refxpert.com', 'https://refxpert.com','http
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
-    "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -53,7 +52,9 @@ INSTALLED_APPS = [
     'ckeditor',
 ]
 
-SITE_ID = 2
+
+
+  # Ensure this corresponds to the correct site in your Django Sites framework
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
